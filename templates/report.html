@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scan Report - {{ url }}</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+    body { background: #0a0f24; color: #e0e0e0; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+    .container { background: #1e1e2f; padding: 40px; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.4); width: 600px; max-width: 95%; opacity: 0; animation: fadeIn 1s ease-in-out forwards; }
+    h1 { color: #4cc9f0; margin-bottom: 30px; text-align: center; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 18px; margin-bottom: 12px; border-radius: 8px; font-size: 18px; font-weight: bold; }
+    .high { background: #571717; color: #ff5f5f; border-left: 8px solid #ff5f5f; }
+    .medium { background: #574617; color: #f4b942; border-left: 8px solid #f4b942; }
+    .info { background: #173157; color: #4cc9f0; border-left: 8px solid #4cc9f0; }
+    .ok { background: #175725; color: #79e87c; border-left: 8px solid #79e87c; }
+    a { display: block; text-align: center; margin-top: 30px; background: #4cc9f0; color: #0a0f24; text-decoration: none; font-weight: bold; padding: 16px; border-radius: 8px; font-size: 18px; transition: 0.3s; }
+    a:hover { background: #3aaed8; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Scan Report for {{ url }}</h1>
+    <ul>
+      {% for vuln, result in report.items() %}
+        {% if 'HIGH' in result %}
+          <li class="high">{{ vuln }}: {{ result }}</li>
+        {% elif 'MEDIUM' in result %}
+          <li class="medium">{{ vuln }}: {{ result }}</li>
+        {% elif 'INFO' in result %}
+          <li class="info">{{ vuln }}: {{ result }}</li>
+        {% else %}
+          <li class="ok">{{ vuln }}: {{ result }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <a href="/">Run Another Scan</a>
+  </div>
+</body>
+</html>

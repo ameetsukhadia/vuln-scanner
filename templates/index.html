@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Vulnerability Scanner</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+    body { background: linear-gradient(to right, #141E30, #243B55); color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .container { background: #1e1e2f; padding: 40px; border-radius: 12px; box-shadow: 0 15px 30px rgba(0,0,0,0.4); width: 500px; max-width: 90%; position: relative; }
+    h1 { text-align: center; margin-bottom: 30px; color: #4cc9f0; }
+    label { display: block; margin-bottom: 10px; font-weight: 600; color: #f1f1f1; }
+    input, textarea { width: 100%; padding: 14px; margin-bottom: 20px; border-radius: 8px; border: none; background: #2a2a3d; color: #e0e0e0; font-size: 16px; }
+    button { width: 100%; padding: 16px; background: #4cc9f0; color: #0a0f24; font-size: 18px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: background 0.3s; }
+    button:hover { background: #3aaed8; }
+    .loader { display: none; margin-top: 20px; border: 8px solid #2a2a3d; border-top: 8px solid #4cc9f0; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; margin-left: auto; margin-right: auto; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Web Vulnerability Scanner</h1>
+    <form method="POST" onsubmit="showLoader()">
+      <label>Target URL:</label>
+      <input type="text" name="url" placeholder="http://example.com" required>
+      <label>Custom Directory Wordlist (optional):</label>
+      <textarea name="wordlist" rows="5" placeholder="/admin\n/login\n/dashboard"></textarea>
+      <button type="submit">Start Scan</button>
+    </form>
+    <div class="loader" id="loader"></div>
+  </div>
+
+  <script>
+    function showLoader() {
+      document.getElementById('loader').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
